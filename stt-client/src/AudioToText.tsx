@@ -22,10 +22,6 @@ interface WordRecognized {
   text: string;
 }
 
-interface TranscribedText {
-  text: string;
-}
-
 const AudioToText: React.FC = () => {
   const [connection, setConnection] = useState<io.Socket>();
   const [currentRecognition, setCurrentRecognition] = useState<string>();
@@ -53,7 +49,6 @@ const AudioToText: React.FC = () => {
 
     socket.emit("send_message", "hello world");
 
-    //TODO: put this back
     socket.emit("startGoogleCloudStream");
 
     socket.on("receive_message", (data) => {
@@ -61,7 +56,6 @@ const AudioToText: React.FC = () => {
     });
 
     socket.on("receive_audio_text", (data) => {
-      console.log("received audio text", data);
       speechRecognized(data);
       console.log("received audio text", data);
     });
@@ -89,8 +83,6 @@ const AudioToText: React.FC = () => {
         if (isRecording) {
           return;
         }
-        //test connection
-        connection.emit("send_message", "testing audio connection");
 
         const stream = await getMediaStream();
 
@@ -117,13 +109,11 @@ const AudioToText: React.FC = () => {
 
         processorRef.current.port.onmessage = (event: any) => {
           const audioData = event.data;
-          console.log("process audio data", audioData);
           connection.emit("send_audio_data", { audio: audioData });
         };
-
         setIsRecording(true);
       } else {
-        console.log("no connection");
+        console.error("No connection");
       }
     })();
     return () => {
@@ -139,29 +129,31 @@ const AudioToText: React.FC = () => {
 
   return (
     <React.Fragment>
-      <Container fluid className="py-5 bg-primary text-light text-center">
-        <Container>
-          <Button
-            className={isRecording ? "btn-danger" : "btn-outline-light"}
-            onClick={connect}
-            disabled={isRecording}
-          >
-            Start
-          </Button>
-          <Button
-            className="btn-outline-light"
-            onClick={disconnect}
-            // disabled={!isRecording}
-          >
-            Stop
-          </Button>
-        </Container>
-      </Container>
       <Container className="py-5 text-center">
-        {recognitionHistory.map((tx, idx) => (
-          <p key={idx}>{tx}</p>
-        ))}
-        <p>{currentRecognition}</p>
+        <Container fluid className="py-5 bg-primary text-light text-center ">
+          <Container>
+            <Button
+              className={isRecording ? "btn-danger" : "btn-outline-light"}
+              onClick={connect}
+              disabled={isRecording}
+            >
+              Start
+            </Button>
+            <Button
+              className="btn-outline-light"
+              onClick={disconnect}
+              disabled={!isRecording}
+            >
+              Stop
+            </Button>
+          </Container>
+        </Container>
+        <Container className="py-5 text-center">
+          {recognitionHistory.map((tx, idx) => (
+            <p key={idx}>{tx}</p>
+          ))}
+          <p>{currentRecognition}</p>
+        </Container>
       </Container>
     </React.Fragment>
   );

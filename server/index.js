@@ -29,6 +29,8 @@ const io = new Server(server, {
   },
 });
 
+//TODO: run in terminal first to setup credentials export GOOGLE_APPLICATION_CREDENTIALS="./speech-to-text-key.json"
+
 const speechClient = new speech.SpeechClient();
 
 io.on("connection", (socket) => {
