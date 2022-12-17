@@ -151,7 +151,7 @@ const AudioToText: React.FC = () => {
           <Button
             className="btn-outline-light"
             onClick={disconnect}
-            disabled={!isRecording}
+            // disabled={!isRecording}
           >
             Stop
           </Button>
