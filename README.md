@@ -6,8 +6,9 @@ This is a simple app that demonstrates how to use the Google Speech-to-Text API 
 
 - Node.js (tested with version 12.x)
 - React (tested with version 16.x)
-- Google Cloud Platform Credentials with Speech-to-text api permissions
-  > Follow this [tutorial](https://console.cloud.google.com/projectselector2/speech/overview?tutorial=speech-to-text__speech-to-text-nodejs&supportedpurview=project) to create credentials and learn how to use the google-speech-to-text API
+- Google Cloud Platform Service Account Key with Speech-to-text api permissions
+
+  > Follow this [tutorial](https://console.cloud.google.com/projectselector2/speech/overview?tutorial=speech-to-text__speech-to-text-nodejs&supportedpurview=project) to create credentials and learn how to use the Google-Speech-To-Text API
 
 ## Setup
 
@@ -24,8 +25,8 @@ The app will now be running at [http://localhost:3000](http://localhost:3000/).
 
 ### Add Credentials
 
-1. Make sure to get google cloud credentials as shown in this [tutorial](https://console.cloud.google.com/projectselector2/speech/overview?tutorial=speech-to-text__speech-to-text-nodejs&supportedpurview=project)
-2. Copy the generated credentials speech-to-text-key.json file save it to the server folder as `speech-to-text-key.json`.
+1. Make sure to get a Google cloud Service Account Key as shown in this [tutorial](https://console.cloud.google.com/projectselector2/speech/overview?tutorial=speech-to-text__speech-to-text-nodejs&supportedpurview=project)
+2. Download the generated Service Account key json file save it to the server folder as `speech-to-text-key.json`.
    > This file name is already added to the .gitignore file but make sure not to push to github or any public repositories
 3. Navigate to the server folder in the terminal and run this to add google credentials to our node js backend.
 
