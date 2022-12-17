@@ -26,13 +26,7 @@ interface TranscribedText {
   text: string;
 }
 
-interface AudioToTextPropTypes {
-  onDataChange: (data: TranscribedText) => void;
-  readOnly: boolean;
-  data: TranscribedText;
-}
-
-const AudioToText: React.FC<AudioToTextPropTypes> = ({}) => {
+const AudioToText: React.FC = () => {
   const [connection, setConnection] = useState<io.Socket>();
   const [currentRecognition, setCurrentRecognition] = useState<string>();
   const [recognitionHistory, setRecognitionHistory] = useState<string[]>([]);
@@ -145,7 +139,6 @@ const AudioToText: React.FC<AudioToTextPropTypes> = ({}) => {
 
   return (
     <React.Fragment>
-      <p>{text || currentRecognition}</p>
       <Container fluid className="py-5 bg-primary text-light text-center">
         <Container>
           <Button
