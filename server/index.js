@@ -29,7 +29,8 @@ const io = new Server(server, {
   },
 });
 
-//TODO: run in terminal first to setup credentials export GOOGLE_APPLICATION_CREDENTIALS="./speech-to-text-key.json"
+//TODO: Create this file in the server directory of the project
+process.env.GOOGLE_APPLICATION_CREDENTIALS = "./speech-to-text-key.json";
 
 const speechClient = new speech.SpeechClient();
 
