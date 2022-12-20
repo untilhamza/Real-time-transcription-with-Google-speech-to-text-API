@@ -28,10 +28,10 @@ The app will now be running at [http://localhost:3000](http://localhost:3000/).
 1. Make sure to get a Google cloud Service Account Key as shown in this [tutorial](https://console.cloud.google.com/welcome?q=search&referrer=search&project=speech-to-text-test-371505&walkthrough_id=speech-to-text--speech-studio-transcriptions)
 2. Download the generated Service Account key json file save it to the server folder as `speech-to-text-key.json`.
    > This file name is already added to the .gitignore file but make sure not to push to github or any public repositories
-3. Navigate to the server folder in the terminal and run this to add google credentials to our node js backend.
+3. Open the server folder and add this line in `index.js` file to add google credentials to our node js backend.
 
 ```
-$ export GOOGLE_APPLICATION_CREDENTIALS="./speech-to-text-key.json"
+process.env.GOOGLE_APPLICATION_CREDENTIALS = "./speech-to-text-key.json"; //TODO: set this to the path for your Service account key JSON file
 ```
 
 ### Backend part
