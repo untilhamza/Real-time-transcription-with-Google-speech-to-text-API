@@ -89,8 +89,16 @@ io.on("connection", (socket) => {
 
           client.emit("receive_audio_text", {
             text: transcription,
-            final: isFinal,
+            isFinal: isFinal,
           });
+
+          // if end of utterance, let's restart stream
+          // this is a small hack. After 65 seconds of silence, the stream will still throw an error for speech length limit
+          if (data.results[0] && data.results[0].isFinal) {
+            stopRecognitionStream();
+            startRecognitionStream(client);
+            console.log("restarted stream serverside");
+          }
         });
     } catch (err) {
       console.error("Error streaming google api " + err);
@@ -117,28 +125,24 @@ server.listen(8081, () => {
 // The BCP-47 language code to use, e.g. 'en-US'
 const encoding = "LINEAR16";
 const sampleRateHertz = 16000;
-const languageCode = "en-US"; //en-US
+const languageCode = "ko-KR"; //en-US
 const alternativeLanguageCodes = ["en-US", "ko-KR"];
 
 const request = {
   config: {
     encoding: encoding,
     sampleRateHertz: sampleRateHertz,
-    languageCode: languageCode,
+    languageCode: "en-US",
     //alternativeLanguageCodes: alternativeLanguageCodes,
     enableWordTimeOffsets: true,
     enableAutomaticPunctuation: true,
     enableWordConfidence: true,
     enableSpeakerDiarization: true,
-    diarizationSpeakerCount: 2,
-    model: "video",
-    //model: "command_and_search",
+    //diarizationSpeakerCount: 2,
+    //model: "video",
+    model: "command_and_search",
+    //model: "default",
     useEnhanced: true,
-    speechContexts: [
-      {
-        phrases: ["hello", "안녕하세요"],
-      },
-    ],
   },
   interimResults: true,
 };
