@@ -12,7 +12,7 @@ This is a simple app that demonstrates how to use the Google Speech-to-Text API 
 
 ## Setup
 
-1.  Clone this repository: `git clone https://github.com/untilhamza/Google-speech-to-text-App-in-react.git`
+1.  Clone this repository: `git clone https://github.com/untilhamza/Real-time-transcription-with-Google-speech-to-text-API.git`
 
 ### Frontend part
 
