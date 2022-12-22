@@ -4,7 +4,7 @@ This is a simple app that demonstrates how to use the Google Speech-to-Text API 
 
 ## Requirements
 
-- Node.js (tested with version 12.x)
+- Node.js (tested with version 14.x)
 - React (tested with version 16.x)
 - Google Cloud Platform Service Account Key with Speech-to-text api permissions
 
