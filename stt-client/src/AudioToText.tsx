@@ -18,7 +18,7 @@ const getMediaStream = () =>
   });
 
 interface WordRecognized {
-  final: boolean;
+  isFinal: boolean;
   text: string;
 }
 
@@ -33,11 +33,15 @@ const AudioToText: React.FC = () => {
   const audioInputRef = useRef<any>();
 
   const speechRecognized = (data: WordRecognized) => {
-    if (data.final) {
+    if (data.isFinal) {
       setCurrentRecognition("...");
       setRecognitionHistory((old) => [data.text, ...old]);
     } else setCurrentRecognition(data.text + "...");
   };
+
+  useEffect(() => {
+    console.log("\n\nrecognitionHistory", recognitionHistory);
+  }, [recognitionHistory]);
 
   const connect = () => {
     connection?.disconnect();
