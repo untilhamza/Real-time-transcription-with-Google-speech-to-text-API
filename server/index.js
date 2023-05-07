@@ -93,7 +93,8 @@ io.on("connection", (socket) => {
           });
 
           // if end of utterance, let's restart stream
-          // this is a small hack. After 65 seconds of silence, the stream will still throw an error for speech length limit
+          // this is a small hack to keep restarting the stream on the server and keep the connection with Google api
+          // Google api disconects the stream every five minutes
           if (data.results[0] && data.results[0].isFinal) {
             stopRecognitionStream();
             startRecognitionStream(client);
